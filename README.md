@@ -1,3 +1,6 @@
 # Java-practice
 - [atm](src/atmsystem)
-    - 登录 查询余额 存款 取款 转账 开户 销户
+    - 本地文件 I/O读取
+
+- [atm](src/atmproject)
+    - 数据库 jdbc
