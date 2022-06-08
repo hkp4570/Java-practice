@@ -11,15 +11,17 @@ public class AtmDao {
         String password = "123456";
         String url = "jdbc:mysql://localhost:3306/atm";
         Connection conn = null;
-        Statement stat = null;
+        PreparedStatement stat = null;
         ResultSet rs = null;
         Atm atm = null;
+        String sql = "SELECT ANAME, APASSWORD, ABALANCE FROM ATM WHERE ANAME = ?";
 
         try {
             Class.forName(className);
             conn = DriverManager.getConnection(url,name,password);
-            stat = conn.createStatement();
-            rs = stat.executeQuery("SELECT ANAME, APASSWORD, ABALANCE FROM ATM WHERE ANAME = '"+ aname +"'");
+            stat = conn.prepareStatement(sql);
+            stat.setString(1, aname);
+            rs = stat.executeQuery();
             if(rs.next()){
                 atm = new Atm();
                 atm.setAname(rs.getString("aname"));
@@ -56,13 +58,16 @@ public class AtmDao {
 
     public void update(Atm atm){
         Connection conn = null;
-        Statement stat = null;
+        PreparedStatement stat = null;
+        String sql = "UPDATE ATM SET APASSWORD = ?, ABALANCE = ? WHERE ANAME = ?";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/atm","root","123456");
-            stat = conn.createStatement();
-            String sql = "UPDATE ATM SET APASSWORD = '"+atm.getApassword()+"',ABALANCE = "+atm.getAbalance()+" WHERE ANAME = '"+atm.getAname()+"'";
-            stat.executeUpdate(sql);
+            stat = conn.prepareStatement(sql);
+            stat.setString(1, atm.getApassword());
+            stat.setFloat(2, atm.getAbalance());
+            stat.setString(3, atm.getAname());
+            stat.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
