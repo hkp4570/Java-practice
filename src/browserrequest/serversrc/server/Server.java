@@ -1,4 +1,4 @@
-package browserrequest.server;
+package browserrequest.serversrc.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
