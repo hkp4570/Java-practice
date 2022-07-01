@@ -51,30 +51,20 @@ public class ServerHandle extends Thread {
 
         HttpServletRequest request = new HttpServletRequest(content, paramsMap);
         HttpServletResponse response = new HttpServletResponse();
-        this.findController(request, response);
+
+        ServletController.findController(request, response);
+        this.responseToBrowser(response);
     }
 
-    //找人干活---控制层
-    private void findController(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            String content = request.getContent(); // resource/index.html
-            Properties pro = new Properties();
-            pro.load(new FileReader("src//browserrequest//serversrc//web.properties"));
-            String realControllerName = pro.getProperty(content);
-            System.out.println(realControllerName);
-            Class clazz = Class.forName(realControllerName);
-            System.out.println(clazz);
-            Object obj = clazz.newInstance();
-            //反射找寻类中的方法
-            Method method = clazz.getMethod("test",HttpServletRequest.class,HttpServletResponse.class);
-            method.invoke(obj,request,response);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     //将最终的响应信息 写回浏览器
-    private void responseToBrowser() {
-
+    private void responseToBrowser(HttpServletResponse response) {
+        try {
+            PrintWriter out = new PrintWriter(socket.getOutputStream());
+            out.println(response.getResponseContent());
+            out.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
