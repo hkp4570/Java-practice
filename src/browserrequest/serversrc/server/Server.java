@@ -8,7 +8,8 @@ public class Server {
     public void startServer(){
         try {
             System.out.println("启动服务器");
-            ServerSocket serverSocket = new ServerSocket(9999);
+            int port = Integer.parseInt(ServerFileReader.getValue("port"));
+            ServerSocket serverSocket = new ServerSocket(port);
             while (true){
                 Socket socket = serverSocket.accept();
                 System.out.println(socket + "socket");
