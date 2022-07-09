@@ -2,9 +2,10 @@ package service;
 
 import dao.AtmDao;
 import domain.Atm;
+import utils.MySpring;
 
 public class AtmService {
-    AtmDao dao = new AtmDao();
+    AtmDao dao = MySpring.getBean("dao.AtmDao");
     public String loginService(String aname, String apassword){
         Atm atm = dao.selectOne(aname);
         if(atm!=null && atm.getApassword().equals(apassword)){
