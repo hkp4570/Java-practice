@@ -1,16 +1,17 @@
-package atmproject.domain;
+package domain;
 
 public class Atm {
     private String aname;
     private String apassword;
     private Float abalance;
 
-    public Atm(){}
-
-    public Atm(String aname, String apassword, Float abalance){
+    public Atm(String aname, String apassword, Float abalance) {
         this.aname = aname;
         this.apassword = apassword;
         this.abalance = abalance;
+    }
+
+    public Atm() {
     }
 
     public String getAname() {
