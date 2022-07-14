@@ -2,6 +2,7 @@ package controller;
 
 import service.AtmService;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,12 +11,17 @@ import java.io.IOException;
 
 public class LoginController extends HttpServlet {
     AtmService atmService = new AtmService();
-    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         String aname = request.getParameter("aname");
         String apassword = request.getParameter("apassword");
-        System.out.println(aname + "----" + apassword);
-        String rs = atmService.loginService(aname,apassword);
-        System.out.println(rs);
+        String rs = atmService.loginService(aname, apassword);
+        if (rs.equals("登录成功")) {
+            RequestDispatcher rq = request.getRequestDispatcher("welcome.jsp");
+            rq.forward(request, response);
+        } else {
+            request.getRequestDispatcher("index.html").forward(request, response);
+        }
     }
 }

@@ -13,4 +13,12 @@ public class AtmService {
         }
         return "用户名或密码错误";
     }
+    public Float inquiry(String aname){
+        return dao.selectOne(aname).getAbalance();
+    }
+    public void deposit(String aname, Float abalance){
+        Atm atm = dao.selectOne(aname);
+        atm.setAbalance(atm.getAbalance()+abalance);
+        dao.update(atm);
+    }
 }

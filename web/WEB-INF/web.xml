@@ -11,4 +11,31 @@
         <servlet-name>login</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>inquiry</servlet-name>
+        <servlet-class>controller.InquiryController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>inquiry</servlet-name>
+        <url-pattern>/inquiry</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deposit</servlet-name>
+        <servlet-class>controller.DepositController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deposit</servlet-name>
+        <url-pattern>/deposit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>doDeposit</servlet-name>
+        <servlet-class>controller.DoDepositController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>doDeposit</servlet-name>
+        <url-pattern>/doDeposit</url-pattern>
+    </servlet-mapping>
 </web-app>

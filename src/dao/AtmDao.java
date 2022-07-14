@@ -32,4 +32,20 @@ public class AtmDao {
         }
         return atm;
     }
+    public void update(Atm atm){
+        String sql = "UPDATE ATM SET APASSWORD = ? , ABALANCE = ? WHERE ANAME = ?";
+        try {
+            Class.forName(className);
+            Connection conn = DriverManager.getConnection(url,user,password);
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, atm.getApassword());
+            statement.setFloat(2, atm.getAbalance());
+            statement.setString(3,atm.getAname());
+            statement.executeUpdate();
+            statement.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
